@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<head>
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>    
+    <title>dd</title>
+</head>
+<body>
+    <div id="root"></div>
+    
+        
+    <script type="text/babel">
+
+        
+        class LikeButton extends React.Component {
+            constructor(props){
+                super(props);
+                this.state = {
+                    liked : false
+                }
+            }
+
+            render() {
+
+                return (<button onClick = {() => {this.setState({liked : true})}}>
+                {this.state.liked === true ? 'liked' : 'like'}
+                </button>)
+                
+            }
+
+        }
+    </script>
+    
+    <script type="text/babel">
+        ReactDOM.render(<LikeButton />, document.querySelector('#root'));
+    </script>
+    
+</body> 
+</html>

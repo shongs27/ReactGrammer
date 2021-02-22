@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+   
+    <script crossorgin src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script crossorgin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>   
+    <title>구구단 - hook</title>
+</head>
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+        const Gugudan = () =>  {
+            const [first, setFirst] = React.useState(Math.ceil(Math.random() * 9));
+            const [second, setSecond] = React.useState(Math.ceil(Math.random() * 9));
+            const [result, setResult] = React.useState('');
+            const [value, setValue] = React.useState('');
+            const focu = React.useRef(null);
+
+
+            const mit = (e) => {
+                e.preventDefault();
+                if(first * second === parseInt(value)){
+                    setFirst(Math.ceil(Math.random() * 9));
+                    setSecond(Math.ceil(Math.random() * 9));
+                    setValue('');
+                    setResult('성공');
+                    focu.current.focus();
+                } else {
+                    setValue('');
+                    setResult('실패');
+                    focu.current.focus();
+                }
+
+            }
+
+            const input = (e) => {setValue(e.target.value);}
+
+            return (
+                <div>
+                    <div> {first} 곱하기 {second} 는?</div>
+                    <form onSubmit = {mit}>
+                        <input type="number" ref={focu} value ={ value } onInput ={input}  />
+                        <button>눌러</button>
+                        <div>{result}</div>
+                    </form>
+                </div>
+
+            )
+          
+        }
+        
+    
+    
+    </script>
+
+    <script type="text/babel">
+        ReactDOM.render(<Gugudan />, document.querySelector('#root'))
+    
+    </script>
+</body>
+</html>
