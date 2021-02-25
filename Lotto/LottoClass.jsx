@@ -1,18 +1,18 @@
 import React, { Component } from 'react';
-
+import Ball from './Ball';
 
 
 function getWinNumbers() {
-    console.log('getWinNumbers')
-    const candidate = Array(45).fill().map((v,i) => i+1)
+    console.log('getWinNumbers');
+    const candidate = Array(45).fill().map((v, i) => i + 1);
     const shuffle = [];
-    while (candidate.length > 0){
-        shuffle.push(candidate.splice(Math.floor(Math.random() * candidate.length),1)[0]);
+    while (candidate.length > 0) {
+      shuffle.push(candidate.splice(Math.floor(Math.random() * candidate.length), 1)[0]);
     }
-    const bonusNumber = shuffle[shuffle.length -1];
-    const winNumbers = shuffles.slice(0, 6).sort((p,c)=> p-c);
+    const bonusNumber = shuffle[shuffle.length - 1];
+    const winNumbers = shuffle.slice(0, 6).sort((p, c) => p - c);
     return [...winNumbers, bonusNumber];
-}
+  }
 
 
 class Lotto extends Component {
@@ -20,51 +20,56 @@ class Lotto extends Component {
         winNumbers: getWinNumbers(), // 당첨 숫자들
         winBalls: [],
         bonus : null, //보너스 공
-        redo: false,
+        redo: false, //재시작 버튼 값
     };
 
     timeouts = [];
 
-    runTimeOuts = () => { 
+   
+    runTimeouts = () => { 
         for (let i =0; i< this.state.winNumbers.length -1; i++){
-            this.timeouts[6] = setTimeout(() => {
+            this.timeouts[i] = setTimeout(() => {
                 this.setState((prevState)=>{
                     //push말고 [...prevState,] 로 해야!
-                    winBalls: [...prevState.winBalls, winNumbers[i]]
-                })
+                    return {winBalls: [...prevState.winBalls, this.state.winNumbers[i]]}
+                });
             }, (i+1) * 1000) // 각 공이 차이있게 나타남
-                
         }
-        this.timeout[6] = setTimeout(() => {
+
+        this.timeouts[6] = setTimeout(() => {
             this.setState({
-                bonus: winNumbers[0],
+                bonus: this.state.winNumbers[6],
                 redo : true,
             })
-        }, 7000)
+        }, 7000) //보너스 공과 redo버튼 등장
     }
 
     componentDidMount(){
         console.log('DidMount')
-       this.runTimeOuts();
+       this.runTimeouts();
     }
 
     componentDidUpdate(prevProps, prevState){
         console.log('DidUpdate1')
-        if(this.winBalls.length === 0){
+        if(this.state.winBalls.length === 0){
             console.log('DidUpdate 조건')
-            this.runTimeOuts();
+            this.runTimeouts();
         }
+        if (prevState.winNumbers !== this.state.winNumbers) {
+            console.log('로또 숫자를 생성합니다.');
+          }
     }
 
-    componentWillUnmount(){
+    // componentWillUnmount(){
         
-        this.timeouts.forEach((v) => {
-            clearTimeout(v);
-        })
-    }
+    //     this.timeouts.forEach((v) => {
+    //         clearTimeout(v);
+    //     })
+    // } 
+    //Unmount는 실행이 안되는데?
 
     onClickRedo = () => {
-        console.log('클릭 Redo')
+        console.log('클릭 Redo');
         this.setState({
             winNumbers: getWinNumbers(), 
             winBalls: [],
@@ -75,7 +80,7 @@ class Lotto extends Component {
     }
 
     render() {
-        const [ winBalls, bonus, redo ] = this.state;
+        const { winBalls, bonus, redo } = this.state;
         return (
             <>
                 <div>당첨숫자</div>
@@ -84,7 +89,7 @@ class Lotto extends Component {
                 </div>
                 <div>보너스</div>
                 {bonus && <Ball number={bonus} />}
-                {redo && <button onClick={this.onClickREdo}>한번 더!</button>}
+                {redo && <button onClick={this.onClickRedo}>한번 더!</button>}
             </>
 
         )
@@ -93,3 +98,4 @@ class Lotto extends Component {
 }
 
 export default Lotto;
+

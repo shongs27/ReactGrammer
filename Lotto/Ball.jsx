@@ -1,13 +1,13 @@
-import React , {PureComponent} from 'react';
+import React, {PureComponent, memo} from 'react';
 
 //함수 컴포넌트가 Hooks를 말하는것은 아니다
 //useState, useEffect같은 것이 Hooks를 말한다
 // PureComponent를 적용하고 싶으면 
 
-const Ball = memo({number}) => {
-    const {number} = this.props;
+const Ball = memo((props) => {
+    const {number} = props;
         let background;
-        let(number <= 10){
+        if(number <= 10){
             background = 'red';
         } else if (number <=20) {
             background ='orange';
@@ -22,7 +22,7 @@ const Ball = memo({number}) => {
             <div className ="ball" style={{background}}>{number}</div>
         )
 
-}
+});
 
 // class Ball extends PureComponent {
 //     render() {

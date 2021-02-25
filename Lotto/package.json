@@ -1,12 +1,12 @@
 {
-  "name": "rock-scissors-paper",
+  "name": "Lotto",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "dev": "webpack serve --env development"
   },
-  "author": "ZeroCho",
+  "author": "Hongs",
   "license": "ISC",
   "dependencies": {
     "react": "^17.0.1",
