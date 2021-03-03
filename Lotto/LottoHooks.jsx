@@ -1,8 +1,9 @@
-import React, { useRef, useMemo, useEffect, useState } from 'react';
+import React, { useState, useRef, useEffect, useMemo, useCallback } from 'react';
 import Ball from './Ball';
 
 
 function getWinNumbers() {
+    console.log('getWinNumbers');
     const candidate = Array(45).fill().map((v, i) => i + 1);
     const shuffle = [];
     while (candidate.length > 0) {
@@ -15,7 +16,8 @@ function getWinNumbers() {
 
 
 const Lotto = () => {
-    const [winNumbers, setwinNumbers] = useState(getWinNumbers());
+    const lottoNumbers = useMemo(() => getWinNumbers(), []); //useMemo로 반복 호출하던 함수를 제한함
+    const [winNumbers, setwinNumbers] = useState(lottoNumbers);
     const [winBalls, setwinBalls] = useState([]);
     const [bonus, setBonus] = useState(null);
     const [redo, setRedo] = useState(false);
@@ -23,6 +25,7 @@ const Lotto = () => {
 
     
     useEffect(() => {
+        console.log('useEffect');
         for (let i =0; i< winNumbers.length -1; i++){
             timeouts.current[i] = setTimeout(() => {
                 setwinBalls((prev) => [...prev, winNumbers[i]] )
@@ -40,7 +43,10 @@ const Lotto = () => {
                  clearTimeout(v);
              })
          }}, [timeouts.current])
-        
+    
+    // useEffect(() => {
+    //     console.log('로또 숫자를 생성합니다');
+    // }, [winNumbers]);
     
 
     const onClickRedo = () => {
@@ -50,7 +56,7 @@ const Lotto = () => {
         setBonus(null);
         setRedo(false);
         timeouts.current = [];
-    }
+    };
 
     
     return (
@@ -69,3 +75,17 @@ const Lotto = () => {
 
 export default Lotto;
 
+// //componentDidMount만 하는 법
+// useEffect(()=> {
+//     //ajax
+// }, []);
+
+// //componentDidUpdate만 하는 법
+// const mounted = useRef(false);
+// useEffet(() => {
+//     if(!mounted.current){
+//         mounted.current = true
+//     } else {
+//         //ajax
+//     }
+// },[바뀔부분])

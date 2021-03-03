@@ -23,7 +23,7 @@ const computerChoice = (imgCoord) => {
   })[0];
 };
 
-module.exports = class Rsp extends Component {
+module.exports = class RspClass extends Component {
   state = {
     result: '',
     imgCoord: rspCoords.바위,
