@@ -1,4 +1,4 @@
-import React, {useState, memo} from 'react'
+import React, {useState, memo, useCallback, useMemo} from 'react'
 import Try from './Try'
 
 // const React = require('react');
@@ -6,29 +6,35 @@ import Try from './Try'
 // const Try = require('./Try');
 
 
-const getNumbers = () =>  {
-    const candidate = [1,2,3,4,5,6,7,8,9];
-    const array = [];
-    for (let i =0; i < 4 ;  i+=1){
-        const chosen = candidate.splice(Math.floor(Math.random() * (9-i)), 1)[0];
-        array.push(chosen);        
-    }    
-    console.log(array);
-    return array;
-}
+
 
 
 const BaseballHooks = memo(() => {
-    
+
+    const getNumbers = () => {
+        const candidate = [1,2,3,4,5,6,7,8,9];
+        const array = [];
+        for (let i =0; i < 4 ;  i+=1){
+            const chosen = candidate.splice(Math.floor(Math.random() * (9-i)), 1)[0];
+            array.push(chosen);        
+        }    
+        console.log(array);
+        return array;
+    };
+
+      
     const [result, setResult] = React.useState('');
     const [value, setValue] = React.useState('');
-    const [answer, setAnswer] = React.useState(getNumbers());
+    const [answer, setAnswer] = React.useState(getNumbers);
     const [trim,setTrim] = React.useState([]);
+
+   
+  
 
     const onSubmitForm = (e) => {
         e.preventDefault();
         if (value === answer.join('')){
-            setResult('홈런!');
+            
             setTrim((t) => ([
                 ...t,
                 {
@@ -36,14 +42,14 @@ const BaseballHooks = memo(() => {
                   result: '홈런!',
                 }
               ]));
-       
+            setResult('홈런!');
             alert('게임을 다시 실행합니다.');
             setValue('');
             setAnswer(getNumbers());
-            setTrim([]);
+            setTrim([]);        
              
         } else { //답 틀렸으면
-            const answerArray = value.split(' ').map((v) => parseInt(v));
+            const answerArray = value.split('').map((v) => parseInt(v));
             
             let strike = 0;
             let ball = 0;
@@ -57,6 +63,7 @@ const BaseballHooks = memo(() => {
                 setTrim([]);       
                 
             } else {
+                
                 for(let i=0; i<4 ; i +=1){
                     if (answerArray[i] === answer[i]){
                         strike += 1;
@@ -64,13 +71,14 @@ const BaseballHooks = memo(() => {
                         ball += 1;
                     }
                 }
-                setTrim(t => { return [
+                setTrim(t => ([
                     ...t,
                     {
                       try: value,
                       result: `${strike} 스트라이크, ${ball} 볼입니다.`,
                     }
-                  ]});
+                  ]));
+               
                 setValue('');
             }
         }

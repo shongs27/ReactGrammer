@@ -1,19 +1,23 @@
-import React, {Component, PureComponent, memo} from 'react';
+import React, {Component, PureComponent, memo, useState} from 'react';
 
 
 
-const RenderTest = memo(() => {
+const RenderTest = () => {
 
-    const [counter, setCounter] = React.useState(0);
+    const [counter, setCounter] = useState(0);
 
     const onClick = () => {
-        setCounter({});
+        
+        setCounter(0);        
+
         
     }
 
          return (
 
             <div>
+                {counter}
+                &nbsp;
                 <button onClick ={onClick}>클릭</button>
             </div>
 
@@ -21,7 +25,7 @@ const RenderTest = memo(() => {
 
         )
 
-})
+}
 
 
 export default RenderTest;

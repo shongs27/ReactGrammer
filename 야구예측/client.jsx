@@ -5,6 +5,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import BaseballHooks from './BaseballHooks'
+import BaseballClass from './BaseballClass'
+import RenderTest from './RenderTest';
 
 
 ReactDOM.render(<BaseballHooks />, document.querySelector('#root'))
