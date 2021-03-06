@@ -8,8 +8,7 @@ class WordRelayClass extends Component {
         result : '',
         goRef : React.createRef()
                
-    }    
-    
+    }       
     
    
 
