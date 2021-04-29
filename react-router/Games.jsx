@@ -1,5 +1,5 @@
 import React from 'react';
-import {BrowserRouter, HashRouter, Route, Link} from 'react-router-dom';
+import { BrowserRouter, HashRouter, Switch, Route, Link } from 'react-router-dom';
 
 import Baseball from '../Baseball/BaseballClass';
 import RSP from '../RSP/RspClass';
@@ -8,10 +8,11 @@ import GameMatcher from './GameMatcher'
 
 const Games = () => {
     return (
-        <BrowserRouter>
-            {/* 공통인부분 */}
-            <div> 
-                
+
+        < BrowserRouter >
+
+            <div>
+
                 <Link to="/game/Baseball">숫자야구 </Link>
                 &nbsp;
                 <Link to="/game/RSP">가위바위보 </Link>
@@ -20,19 +21,20 @@ const Games = () => {
                 &nbsp;
                 <Link to="/game/index">게임 매쳐</Link>
             </div>
-            {/* 바뀌는 부분 */}
+
             <div>
 
                 {/* <Route path="/Baseball" component={Baseball} />
                 <Route path="/RSP" component={RSP} />
                 <Route path="/lotto" component={Lotto} /> */}
-                
-                <Route path="/game/:name" component={GameMatcher} /> 
-                <Route path="/game/Baseball" render ={(props) => <GameMatcher {...props} />}
-                />
+                <Switch>
+                    <Route exact path="/" render={(props) => <GameMatcher {...props} />} />
+                    <Route path="/game/:name" render={(props) => <GameMatcher {...props} />} />
+                </Switch>
+
             </div>
-        
-        </BrowserRouter>
+
+        </BrowserRouter >
     )
 }
 

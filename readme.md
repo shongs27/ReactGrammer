@@ -11,16 +11,16 @@
 3월 6일 | 야구까지 복습완료
 
 ---
-===
 ---
 
 ## 문법 체크사항
 - [x] useState 
-- [ ] LifeCycle (shouldComponentUpdate ..)
+- [x] useReducer
+- [x] LifeCycle (shouldComponentUpdate ..)
+- [x] useEffect
 - [x] React.memo / PureComponent
-- [?] useCallback, useMemo  
-- [ ] useEffect
-- [ ] useReducer
+- [?] useCallback, useMemo    
+
 ***
 
 > 될때까지 하라
@@ -28,7 +28,7 @@
 
 [나의 깃허브](https://github.com/shongs27)
 
-![대체텍스트](https://media.vlpt.us/images/devpark/post/3f691ef0-d5de-4fc2-81d0-951d8ed8a36d/Ekran-Resmi-2019-11-18-18.08.13.png "리액트1")
+![대체텍스트](https://media.vlpt.us/images/devpark/post/3f691ef0-d5de-4fc2-81d0-951d8ed8a36d/Ekran-Resmi-2019-11-18-18.08.13.png "리액트1")(https://github.com/shongs27)
 
 <img width="150" src="https://media.vlpt.us/images/devpark/post/3f691ef0-d5de-4fc2-81d0-951d8ed8a36d/Ekran-Resmi-2019-11-18-18.08.13.png" alt="리액트 가즈아" title="리액트2">
 

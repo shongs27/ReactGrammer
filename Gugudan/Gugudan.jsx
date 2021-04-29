@@ -2,7 +2,6 @@ const React = require('react');
 const { useReducer } = React;
 
 
-
 const iniState = {
     first: Math.ceil(Math.random() * 9),
     second: Math.ceil(Math.random() * 9),
@@ -27,7 +26,7 @@ function reducer(state, action) {
                 result: "실패"
             }
         case 'target':
-            
+
             return {
                 ...state,
                 value: action.value
@@ -47,7 +46,7 @@ const Gugudan = () => {
     // const [second, setSecond] = React.useState(Math.ceil(Math.random() * 9));
     // const [result, setResult] = React.useState('');
     // const [value, setValue] = React.useState('');
-    const focu = React.useRef(null);    
+    const focu = React.useRef(null);
 
     const mit = (e) => {
         e.preventDefault();

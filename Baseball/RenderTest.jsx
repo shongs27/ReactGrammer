@@ -1,29 +1,34 @@
-import React, {Component, PureComponent, memo, useState} from 'react';
+import React, { useCallback, Component, PureComponent, memo, useState } from 'react';
+import Try from './Try';
 
+//불변성
+// props 렌더링
 
+console.log('컴포넌트 시작(무시)');
 
 const RenderTest = () => {
-
+    console.log('안 첫번째')
     const [counter, setCounter] = useState(0);
 
-    const onClick = () => {
-        
-        setCounter(0);        
+    const onClick = useCallback(() => {
 
-        
-    }
+        setCounter((counter) => counter + 1);
+    }, [])
 
-         return (
+    console.log('안 두번째')
+    return (
 
-            <div>
-                {counter}
+        <div>
+            {console.log('안 세번째(렌더링부분)')}
+            {counter}
                 &nbsp;
-                <button onClick ={onClick}>클릭</button>
-            </div>
+            <button onClick={onClick}>클릭</button>
+            <Try tryInfo={counter} tryClick={onClick} />
+        </div>
 
 
 
-        )
+    )
 
 }
 
@@ -41,9 +46,9 @@ export default RenderTest;
 
 //     onClick = () => {
 //         this.setState({
-           
+
 //         });
-        
+
 //     }
 
 //     // shouldComponentUpdate(nextProps, nextState){

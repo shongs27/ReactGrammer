@@ -9,4 +9,4 @@ import BaseballClass from './BaseballClass'
 import RenderTest from './RenderTest';
 
 
-ReactDOM.render(<BaseballHooks />, document.querySelector('#root'))
+ReactDOM.render(<RenderTest />, document.querySelector('#root'))

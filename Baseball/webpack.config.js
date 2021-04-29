@@ -1,10 +1,10 @@
 const path = require("path");
-const RefreshWebpackPlugin = require("@pmmmwh/react-refresh-webpack-plugin");
+const ReactRefreshWebpackPlugin = require("@pmmmwh/react-refresh-webpack-plugin");
 
 module.exports = {
   name: "baseball-setting",
   mode: "development",
-
+  devtool: "inline-source-map",
   resolve: {
     extensions: [".js", ".jsx"],
   },
@@ -16,7 +16,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.jsx?/,
+        test: /\.jsx?$/,
         loader: "babel-loader",
         options: {
           presets: [
@@ -36,15 +36,15 @@ module.exports = {
             "react-refresh/babel",
           ],
         },
+        exclude: path.join(__dirname, "node_modules"),
       },
     ],
   },
-
-  plugins: [new RefreshWebpackPlugin()],
+  plugins: [new ReactRefreshWebpackPlugin()],
 
   output: {
-    // path: path.join(__dirname, "dist"),
-    // filename: "[name].js",
+    path: path.join(__dirname, "dist"),
+    filename: "[name].js",
     publicPath: "/dist/",
   },
 

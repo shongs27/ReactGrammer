@@ -78,7 +78,7 @@ const changeHand = () => {
     }
   };
 
-  //매개변수를 넣기 위한 고차함수 때문에 ()=> () => {} 라고 하는데..
+  //매개변수를 넣기 위한 고차함수 때문에 ()=> () => {} 로 하기도 한다
 const onClickBtn = (choice) => {
     // console.log(choice);
     
